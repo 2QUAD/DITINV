@@ -10,8 +10,9 @@ use App\Models\Product;
 use App\Models\Unit;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Picqer\Barcode\BarcodeGeneratorHTML;
-use Str;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -24,8 +25,40 @@ class ProductController extends Controller
         ]);
     }
 
+  
     public function create(Request $request)
     {
+        $categories = $this->getCategories($request->get('category'));
+        $units = $this->getUnits($request->get('unit'));
+
+        return view('products.create', [
+            'categories' => $categories,
+            'units' => $units,
+        ]);
+
+    }
+
+    private function getCategories($categorySlug = null)
+    {
+        $query = Category::where('user_id', auth()->id());
+        if ($categorySlug) {
+            $query->whereSlug($categorySlug);
+        }
+        return $query->get(['id', 'name']);
+    }
+
+    private function getUnits($unitSlug = null)
+    {
+        $query = Unit::where('user_id', auth()->id());
+        if ($unitSlug) {
+            $query->whereSlug($unitSlug);
+        }
+        return $query->get(['id', 'name']);
+    }
+
+
+   /**   
+  {
         $categories = Category::where("user_id", auth()->id())->get(['id', 'name']);
         $units = Unit::where("user_id", auth()->id())->get(['id', 'name']);
 
@@ -42,7 +75,7 @@ class ProductController extends Controller
             'units' => $units,
         ]);
     }
-
+*/
     public function store(StoreProductRequest $request)
     {
         /**
@@ -113,7 +146,7 @@ class ProductController extends Controller
         $image = $product->product_image;
         if ($request->hasFile('product_image')) {
 
-            // Delete Old Photo
+            
             if ($product->product_image) {
                 unlink(public_path('storage/') . $product->product_image);
             }
