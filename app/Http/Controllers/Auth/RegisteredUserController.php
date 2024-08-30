@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
-use Str;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
     /**
-     * Display the registration view.
+     * Exibe a visão de registro.
      */
     public function create(): View
     {
@@ -25,7 +25,7 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Handle an incoming registration request.
+     * Manipula uma solicitação de registro de usuário.
      *
      * @throws \Illuminate\Validation\ValidationException
      */
