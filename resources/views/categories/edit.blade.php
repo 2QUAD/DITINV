@@ -7,7 +7,7 @@
             <div class="card-header">
                 <div>
                     <h3 class="card-title">
-                        {{ __('Edit Category') }}
+                        {{ __('Editar Categoria') }}
                     </h3>
                 </div>
 
@@ -20,7 +20,7 @@
                 @method('put')
                 <div class="card-body">
                     <x-input
-                        label="{{ __('Name') }}"
+                        label="{{ __('Nome') }}"
                         id="name"
                         name="name"
                         :value="old('name', $category->name)"
@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-footer text-end">
                     <x-button type="submit">
-                        {{ __('Update') }}
+                        {{ __('Atualizar') }}
                     </x-button>
                 </div>
             </form>
@@ -40,12 +40,12 @@
 
 @pushonce('page-scripts')
 <script>
-    // Slug Generator
+    // Gerador de Slug
     const title = document.querySelector("#name");
     const slug = document.querySelector("#slug");
     title.addEventListener("keyup", function() {
         let preslug = title.value;
-        preslug = preslug.replace(/ /g,"-");
+        preslug = preslug.replace(/ /g, "-");
         slug.value = preslug.toLowerCase();
     });
 </script>

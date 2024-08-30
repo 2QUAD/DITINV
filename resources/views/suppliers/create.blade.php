@@ -6,7 +6,7 @@
         <div class="row g-2 align-items-center mb-3">
             <div class="col">
                 <h2 class="page-title">
-                    {{ __('Create Supplier') }}
+                    {{ __('Criar Fornecedor') }}
                 </h2>
             </div>
         </div>
@@ -26,14 +26,14 @@
                         <div class="card">
                             <div class="card-body">
                                 <h3 class="card-title">
-                                    {{ __('Profile Image') }}
+                                    {{ __('Imagem de Perfil') }}
                                 </h3>
 
                                 <img class="img-account-profile rounded-circle mb-2" src="{{ asset('assets/img/demo/user-placeholder.svg') }}" alt="" id="image-preview" />
 
-                                <div class="small font-italic text-muted mb-2">JPG or PNG no larger than 1 MB</div>
+                                <div class="small font-italic text-muted mb-2">JPG ou PNG com no máximo 1 MB</div>
 
-                                <input class="form-control @error('photo') is-invalid @enderror" type="file"  id="image" name="photo" accept="image/*" onchange="previewImage();">
+                                <input class="form-control @error('photo') is-invalid @enderror" type="file" id="image" name="photo" accept="image/*" onchange="previewImage();">
 
                                 @error('photo')
                                 <div class="invalid-feedback">
@@ -48,28 +48,27 @@
                         <div class="card">
                             <div class="card-body">
                                 <h3 class="card-title">
-                                    {{ __('Supplier Details') }}
+                                    {{ __('Detalhes do Fornecedor') }}
                                 </h3>
 
                                 <div class="row row-cards">
                                     <div class="col-md-12">
                                         <x-input name="name" :required="true" />
 
-                                        <x-input name="email" label="Email address" :required="true" />
+                                        <x-input name="email" label="Endereço de E-mail" :required="true" />
 
-                                        <x-input name="shopname" label="Shop name" :required="true" />
+                                        <x-input name="shopname" label="Nome da Loja" :required="true" />
 
-                                        <x-input name="phone" label="Phone number" :required="true" />
+                                        <x-input name="phone" label="Número de Telefone" :required="true" />
                                     </div>
-
 
                                     <div class="col-sm-6 col-md-6">
                                         <label for="type" class="form-label required">
-                                            Type of supplier
+                                            Tipo de Fornecedor
                                         </label>
 
                                         <select class="form-select @error('type') is-invalid @enderror" id="type" name="type">
-                                            <option selected="" disabled="">Select a type:</option>
+                                            <option selected="" disabled="">Selecione um tipo:</option>
 
                                             @foreach(\App\Enums\SupplierType::cases() as $supplierType)
                                                 <option value="{{ $supplierType->value }}" @selected(old('type') == $supplierType->value)>
@@ -86,13 +85,13 @@
                                     </div>
 
                                     <div class="col-sm-6 col-md-6">
-                                        <x-input name="account_number" label="Account number"/>
+                                        <x-input name="account_number" label="Número da Conta"/>
                                     </div>
 
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label for="address" class="form-label required">
-                                                {{ __('Address') }}
+                                                {{ __('Endereço') }}
                                             </label>
 
                                             <textarea id="address"
@@ -112,11 +111,11 @@
                             </div>
                             <div class="card-footer text-end">
                                 <button class="btn btn-primary" type="submit">
-                                    {{ __('Save') }}
+                                    {{ __('Salvar') }}
                                 </button>
 
                                 <a class="btn btn-outline-warning" href="{{ route('suppliers.index') }}">
-                                    {{ __('Cancel') }}
+                                    {{ __('Cancelar') }}
                                 </a>
                             </div>
                         </div>
