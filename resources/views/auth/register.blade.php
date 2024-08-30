@@ -5,13 +5,13 @@
     @csrf
 
     <div class="card-body">
-        <h2 class="card-title text-center mb-4">Create new account</h2>
+        <h2 class="card-title text-center mb-4">Criar nova conta</h2>
         <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
+            <label for="username" class="form-label">Nome de usuário</label>
             <input type="text" name="username" id="username"
                    class="form-control @error('username') is-invalid @enderror"
                    value="{{ old('username') }}"
-                   placeholder="Enter username"
+                   placeholder="Digite o nome de usuário"
             >
 
             @error('username')
@@ -21,11 +21,11 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="name" class="form-label">Full Name</label>
+            <label for="name" class="form-label">Nome completo</label>
             <input type="text" name="name" id="name"
                    class="form-control @error('name') is-invalid @enderror"
                    value="{{ old('name') }}"
-                   placeholder="Enter Full Name"
+                   placeholder="Digite o nome completo"
             >
 
             @error('name')
@@ -35,11 +35,11 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
+            <label for="email" class="form-label">Endereço de e-mail</label>
             <input type="email" name="email" id="email"
                    class="form-control @error('email') is-invalid @enderror"
                    value="{{ old('email') }}"
-                   placeholder="Enter email"
+                   placeholder="Digite o e-mail"
             >
 
             @error('email')
@@ -49,11 +49,11 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
+            <label for="password" class="form-label">Senha</label>
             <div class="input-group input-group-flat">
                 <input type="password" name="password" id="password"
                        class="form-control @error('password') is-invalid @enderror"
-                       placeholder="Password"
+                       placeholder="Senha"
                        autocomplete="off"
                 >
 
@@ -65,15 +65,15 @@
             </div>
         </div>
         <div class="mb-3">
-            <label for="password_confirmation" class="form-label">Confirm Password</label>
+            <label for="password_confirmation" class="form-label">Confirmar Senha</label>
             <div class="input-group input-group-flat">
                 <input type="password" name="password_confirmation" id="password_confirmation"
-                       class="form-control @error('password') is-invalid @enderror"
-                       placeholder="Password Confirmation"
+                       class="form-control @error('password_confirmation') is-invalid @enderror"
+                       placeholder="Confirmação de Senha"
                        autocomplete="off"
                 >
 
-                @error('password')
+                @error('password_confirmation')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -86,21 +86,21 @@
                        class="form-check-input @error('terms-of-service') is-invalid @enderror"
                 >
                 <span class="form-check-label">
-                    Agree the <a href="./terms-of-service.html" tabindex="-1">
-                        terms and policy</a>.
+                    Concordo com os <a href="./terms-of-service.html" tabindex="-1">
+                        termos e políticas</a>.
                 </span>
             </label>
         </div>
         <div class="form-footer">
             <button type="submit" class="btn btn-primary w-100">
-                Create new account
+                Criar nova conta
             </button>
         </div>
     </div>
 </form>
 <div class="text-center text-secondary mt-3">
-    Already have account? <a href="{{ route('login') }}" tabindex="-1">
-        Sign in
+    Já tem uma conta? <a href="{{ route('login') }}" tabindex="-1">
+        Entrar
     </a>
 </div>
 @endsection
