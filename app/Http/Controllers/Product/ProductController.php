@@ -11,6 +11,7 @@ use App\Models\Unit;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Picqer\Barcode\BarcodeGeneratorHTML;
 use Illuminate\Support\Str;
 
@@ -79,12 +80,14 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         /**
-         * Handle upload image
-         */
+         * Upload image UNLINK
+         
         $image = "";
         if ($request->hasFile('product_image')) {
             $image = $request->file('product_image')->store('products', 'public');
         }
+        */
+        $image = $this->handleImageUpload($request);
 
         Product::create([
             "code" => IdGenerator::generate([
@@ -110,8 +113,14 @@ class ProductController extends Controller
             "uuid" => Str::uuid()
         ]);
 
-
-        return to_route('products.index')->with('success', 'Product has been created!');
+       return redirect()->route("products.index")->with("Parabens","Produto criado com sucesso!"); 
+    }
+    private function handleImageUpload(Request $request)
+    {
+        if ($request->hasFile('product_image')) {
+            return $request->file('product_image')->store('products', 'public');
+        }
+        return null;
     }
 
     public function show($uuid)
@@ -141,18 +150,17 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, $uuid)
     {
         $product = Product::where("uuid", $uuid)->firstOrFail();
-        $product->update($request->except('product_image'));
-
-        $image = $product->product_image;
-        if ($request->hasFile('product_image')) {
-
+        
+        DB::transaction(function () use ($product, $request, $uuid) {
             
-            if ($product->product_image) {
-                unlink(public_path('storage/') . $product->product_image);
+            $image = $product->product_image;
+
+        if ($request->hasFile('product_image')) {
+            if ($product->product_image && Storage::disk('public')->exists($product->product_image)) {
+             Storage::disk('public')->delete($product->product_image);
             }
             $image = $request->file('product_image')->store('products', 'public');
         }
-
         $product->name = $request->name;
         $product->slug = Str::slug($request->name, '-');
         $product->category_id = $request->category_id;
@@ -167,20 +175,23 @@ class ProductController extends Controller
         $product->product_image = $image;
         $product->save();
 
+    
+});
 
-        return redirect()
-            ->route('products.index')
-            ->with('success', 'Product has been updated!');
-    }
+return redirect()
+    ->route('products.index')
+    ->with('success', 'Produto atualizado com sucesso!');
+}
+
 
     public function destroy($uuid)
     {
         $product = Product::where("uuid", $uuid)->firstOrFail();
         /**
-         * Delete photo if exists.
+         * se existe a foto, ela deve ser apagada
          */
         if ($product->product_image) {
-            // check if image exists in our file system
+            // verifica se a imagem existe no nosso sistema de arquivos
             if (file_exists(public_path('storage/') . $product->product_image)) {
                 unlink(public_path('storage/') . $product->product_image);
             }
@@ -190,6 +201,6 @@ class ProductController extends Controller
 
         return redirect()
             ->route('products.index')
-            ->with('success', 'Product has been deleted!');
+            ->with('success', 'Produto excluído com sucesso!');
     }
 }
