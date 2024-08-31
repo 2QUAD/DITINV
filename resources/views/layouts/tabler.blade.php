@@ -431,20 +431,20 @@
                                         </svg>
                                     </span>
                                     <span class="nav-link-title">
-                                        {{ __('Settings') }}
+                                        {{ __('Ferramentas') }}
                                     </span>
                                 </a>
                                 <div class="dropdown-menu">
                                     <div class="dropdown-menu-columns">
                                         <div class="dropdown-menu-column">
                                             {{-- <a class="dropdown-item" href="{{ route('users.index') }}">
-                                                    {{ __('Users') }}
+                                                    {{ __('Usuarios') }}
                                                 </a> --}}
                                             <a class="dropdown-item" href="{{ route('categories.index') }}">
-                                                {{ __('Categories') }}
+                                                {{ __('Categorias') }}
                                             </a>
                                             <a class="dropdown-item" href="{{ route('units.index') }}">
-                                                {{ __('Units') }}
+                                                {{ __('Unidades') }}
                                             </a>
                                         </div>
                                     </div>

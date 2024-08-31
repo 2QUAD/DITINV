@@ -26,7 +26,7 @@
                                     {{ __('Imagem do Produto') }}
                                 </h3>
 
-                                <img style="width: 90px;" id="image-preview"
+                                <img class="img-fluid" id="image-preview"
                                     src="{{ $product->product_image ? asset('storage/' . $product->product_image) : asset('assets/img/products/default.webp') }}"
                                     alt="" class="img-account-profile mb-2">
                             </div>
@@ -44,23 +44,23 @@
                                 <table class="table table-bordered card-table table-vcenter text-nowrap datatable">
                                     <tbody>
                                         <tr>
-                                            <td>Nome</td>
+                                            <td>{{ __('Nome') }}</td>
                                             <td>{{ $product->name }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Slug</td>
+                                            <td>{{ __('Slug') }}</td>
                                             <td>{{ $product->slug }}</td>
                                         </tr>
                                         <tr>
-                                            <td><span class="text-secondary">Código</span></td>
+                                            <td><span class="text-secondary">{{ __('Código') }}</span></td>
                                             <td>{{ $product->code }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Cod. de Barras</td>
+                                            <td>{{ __('Cod. de Barras') }}</td>
                                             <td>{!! $barcode !!}</td>
                                         </tr>
                                         <tr>
-                                            <td>Categoria</td>
+                                            <td>{{ __('Categoria') }}</td>
                                             <td>
                                                 <a href="{{ route('categories.show', $product->category) }}"
                                                     class="badge bg-blue-lt">
@@ -69,7 +69,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Unidade</td>
+                                            <td>{{ __('Unidade') }}</td>
                                             <td>
                                                 <a href="{{ route('units.show', $product->unit) }}"
                                                     class="badge bg-blue-lt">
@@ -79,11 +79,11 @@
                                         </tr>
 
                                         <tr>
-                                            <td>Quantidade</td>
+                                            <td>{{ __('Quantidade') }}</td>
                                             <td>{{ $product->quantity }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Alerta de Quantidade</td>
+                                            <td>{{ __('Alerta de Quantidade') }}</td>
                                             <td>
                                                 <span class="badge bg-red-lt">
                                                     {{ $product->quantity_alert }}
@@ -92,15 +92,13 @@
                                         </tr>
 
                                         <tr>
-                                            <td>Preço de Compra</td>
-                                            <td>{{ $product->buying_price }}</td>
+                                            <td>{{ __('Preço de Compra') }}</td>
+                                            <td>{{ number_format($product->buying_price, 2, ',', '.') }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Preço de Venda</td>
-                                            <td>{{ $product->selling_price }}</td>
+                                            <td>{{ __('Preço de Venda') }}</td>
+                                            <td>{{ number_format($product->selling_price, 2, ',', '.') }}</td>
                                         </tr>
-                                        <tr>
-                                            
                                         <tr>
                                             <td>{{ __('Observações') }}</td>
                                             <td>{{ $product->notes }}</td>
@@ -109,7 +107,7 @@
                                 </table>
                             </div>
                             <div class="card-footer text-end">
-                                <a class="btn btn-info" href="{{ url()->previous() }}">
+                                <a class="btn btn-info" href="{{ url()->previous() }}" data-bs-toggle="tooltip" title="{{ __('Voltar para a página anterior') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left"
                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -120,7 +118,7 @@
                                     </svg>
                                     {{ __('Voltar') }}
                                 </a>
-                                <a class="btn btn-warning" href="{{ route('products.edit', $product->uuid) }}">
+                                <a class="btn btn-warning" href="{{ route('products.edit', $product->uuid) }}" data-bs-toggle="tooltip" title="{{ __('Editar detalhes do produto') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil"
                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

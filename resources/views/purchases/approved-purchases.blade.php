@@ -4,9 +4,9 @@
 <div class="page-body">
     @if(count($purchases) == 0)
         <x-empty
-            title="No approved purchases found"
-            message="Try adjusting your search or filter to find what you're looking for."
-            button_label="{{ __('Add your first Purchase') }}"
+            title="Nenhuma compra aprovada encontrada"
+            message="Tente ajustar sua busca ou filtro para encontrar o que está procurando."
+            button_label="{{ __('Adicione sua primeira Compra') }}"
             button_route="{{ route('purchases.create') }}"
         />
     @else
@@ -15,8 +15,8 @@
                 <div class="card-header">
                     <div>
                         <h3 class="card-title">
-                            {{ __('Purchases: ') }}
-                            <span class="btn btn-success btn-sm text-uppercase">{{ __('Approved') }}</span>
+                            {{ __('Compras: ') }}
+                            <span class="btn btn-success btn-sm text-uppercase">{{ __('Aprovadas') }}</span>
                         </h3>
                     </div>
 
@@ -30,12 +30,12 @@
                     <table class="table table-bordered card-table table-vcenter text-nowrap datatable">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col" class="text-center">No.</th>
-                                <th scope="col" class="text-center">Purchase</th>
-                                <th scope="col" class="text-center">Supplier</th>
-                                <th scope="col" class="text-center">Date</th>
+                                <th scope="col" class="text-center">Nº</th>
+                                <th scope="col" class="text-center">Compra</th>
+                                <th scope="col" class="text-center">Fornecedor</th>
+                                <th scope="col" class="text-center">Data</th>
                                 <th scope="col" class="text-center">Total</th>
-                                <th scope="col" class="text-center">Action</th>
+                                <th scope="col" class="text-center">Ação</th>
                             </tr>
                         </thead>
                         <tbody>
