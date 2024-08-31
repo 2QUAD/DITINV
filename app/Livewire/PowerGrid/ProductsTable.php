@@ -81,7 +81,7 @@ final class ProductsTable extends PowerGridComponent
                 ->sortable(),
 
             Column::add()
-                ->title('Category')
+                ->title('Categoria')
                 ->field('category_name')
                 ->headerAttribute('text-center')
                 ->bodyAttribute('text-center'),
